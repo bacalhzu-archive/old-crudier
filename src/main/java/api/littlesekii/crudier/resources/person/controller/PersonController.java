@@ -38,9 +38,8 @@ public class PersonController {
 		PersonResponseDTO res = null;
 		
 		Person data = service.findById(id);
-		
-		if (data != null)
-			res = new PersonResponseDTO(data.getId(), data.getName(), data.getRegister());
+	
+		res = new PersonResponseDTO(data.getId(), data.getName(), data.getRegister());
 		
 		return ResponseEntity.ok().body(res);
 	}

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import api.littlesekii.crudier.resources.person.model.Person;
 import api.littlesekii.crudier.resources.person.repository.PersonRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class PersonService {
@@ -20,7 +21,9 @@ public class PersonService {
 	}
 	
 	public Person findById(Long id) {
-		Person data = repository.findById(id).orElse(null);
+		Person data = repository.findById(id).orElseThrow(
+			() -> new EntityNotFoundException(String.format("Could not fetch any data by id %d", id))
+		);
 		return data;
 	}
 	
