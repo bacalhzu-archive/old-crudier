@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import api.littlesekii.crudier.exception.DatabaseEntityNotFoundException;
+import api.littlesekii.crudier.exception.DatabaseIntegrityViolationException;
 import api.littlesekii.crudier.resources.person.model.Person;
 import api.littlesekii.crudier.resources.person.repository.PersonRepository;
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class PersonService {
@@ -22,8 +23,27 @@ public class PersonService {
 	
 	public Person findById(Long id) {
 		Person data = repository.findById(id).orElseThrow(
-			() -> new EntityNotFoundException(String.format("Could not fetch any data by id %d", id))
+			() -> new DatabaseEntityNotFoundException(
+				String.format("Could not fetch any data by id '%d'", id)
+			)
 		);
+		return data;
+	}
+	
+	public Person insert(Person person) {
+		
+		Person existingData = repository.findByRegister(person.getRegister());
+		
+		if (existingData != null)
+			throw new DatabaseIntegrityViolationException(
+				String.format(						
+					"Could not insert any data with register '%s'. "
+					+ "There is already a entity with this register in database.",
+					person.getRegister()				
+				)
+			);
+		
+		Person data = repository.save(person);		
 		return data;
 	}
 	

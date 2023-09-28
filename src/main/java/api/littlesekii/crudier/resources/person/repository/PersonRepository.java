@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import api.littlesekii.crudier.resources.person.model.Person;
 
+
 public interface PersonRepository extends JpaRepository<Person, Long> {
-	
+	Person findByRegister(String register);
 }
