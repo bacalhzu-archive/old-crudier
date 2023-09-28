@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -78,6 +79,31 @@ public class PersonController {
 			data.getRegister()
 		);
 			
+		return ResponseEntity.ok().body(res);
+	}
+	
+	@PutMapping
+	public ResponseEntity<PersonResponseDTO> update(@RequestBody PersonRequestDTO req) {
+		
+		if (req.id() == null || req.name() == null || req.register() == null)
+			throw new InvalidRequestParamException("Please check informed parameters and try again.");
+		
+		PersonResponseDTO res = null;
+		
+		Person data = service.update(
+			new Person(
+				req.id(),
+				req.name(), 
+				req.register()
+			)
+		);
+		
+		res = new PersonResponseDTO(
+			data.getId(), 
+			data.getName(), 
+			data.getRegister()
+		);
+		
 		return ResponseEntity.ok().body(res);
 	}
 	
