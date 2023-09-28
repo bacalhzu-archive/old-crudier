@@ -1,4 +1,4 @@
-package api.littlesekii.crudier.resources.handler;
+package api.littlesekii.crudier.resources.handler.controller;
 
 import java.time.Instant;
 
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import api.littlesekii.crudier.exception.DatabaseEntityNotFoundException;
 import api.littlesekii.crudier.exception.DatabaseIntegrityViolationException;
 import api.littlesekii.crudier.exception.InvalidRequestParamException;
+import api.littlesekii.crudier.resources.handler.ResponseError;
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice

@@ -24,7 +24,7 @@ public class PersonService {
 	public Person findById(Long id) {
 		Person data = repository.findById(id).orElseThrow(
 			() -> new DatabaseEntityNotFoundException(
-				String.format("Could not fetch any data by id '%d'", id)
+				String.format("Could not find any data by id '%d'", id)
 			)
 		);
 		return data;
@@ -45,6 +45,20 @@ public class PersonService {
 		
 		Person data = repository.save(person);		
 		return data;
+	}
+	
+	public Person delete(Long id) {
+		
+		Person existingData = repository.findById(id).orElseThrow(
+			() -> new DatabaseEntityNotFoundException(
+				String.format("Could not find any data by id '%d'", id)
+			)
+		);
+		
+		repository.deleteById(id);
+		
+		Person data = existingData;		
+		return data;		
 	}
 	
 }

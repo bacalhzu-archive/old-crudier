@@ -6,7 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import api.littlesekii.crudier.resources.person.model.Person;
 import api.littlesekii.crudier.resources.person.repository.PersonRepository;
-import api.littlesekii.crudier.resources.person.service.PersonService;
 
 @SpringBootTest
 class CrudierApplicationTests {
@@ -14,8 +13,8 @@ class CrudierApplicationTests {
 	@Autowired
 	private PersonRepository repository;
 	
-	@Autowired
-	private PersonService service;
+//	@Autowired
+//	private PersonService service;
 	
 	@Test
 	void contextLoads() {
