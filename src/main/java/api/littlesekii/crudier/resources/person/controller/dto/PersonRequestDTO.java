@@ -1,5 +1,8 @@
 package api.littlesekii.crudier.resources.person.controller.dto;
 
-public record PersonRequestDTO(Long id, String name, String register) {
+public record PersonRequestDTO(
+	String name,
+	String register
+) {
 
 }

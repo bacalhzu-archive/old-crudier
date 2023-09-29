@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import api.littlesekii.crudier.exception.InvalidRequestParamException;
 import api.littlesekii.crudier.resources.person.controller.dto.PersonRequestDTO;
@@ -65,7 +63,7 @@ public class PersonController {
 	@PostMapping
 	public ResponseEntity<PersonResponseDTO> insert(@RequestBody PersonRequestDTO req) {
 		
-		if (req.name() == null || req.register() == null)
+		if (Utils.notValid(req.name()) || Utils.notValid(req.register()))
 			throw new InvalidRequestParamException("Please check informed parameters and try again.");
 		
 		PersonResponseDTO res = null;		
@@ -90,17 +88,17 @@ public class PersonController {
 
 	}
 	
-	@PutMapping
-	public ResponseEntity<PersonResponseDTO> update(@RequestBody PersonRequestDTO req) {
+	@PutMapping("/{id}")
+	public ResponseEntity<PersonResponseDTO> update(@PathVariable Long id, @RequestBody PersonRequestDTO req) {
 		
-		if (req.id() == null || req.name() == null || req.register() == null)
+		if (Utils.notValid(req.name()) || Utils.notValid(req.register()))
 			throw new InvalidRequestParamException("Please check informed parameters and try again.");
 		
 		PersonResponseDTO res = null;
 		
 		Person data = service.update(
 			new Person(
-				req.id(),
+				id,
 				req.name(), 
 				req.register()
 			)
