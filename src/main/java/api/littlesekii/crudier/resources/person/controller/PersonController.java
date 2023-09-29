@@ -1,8 +1,10 @@
 package api.littlesekii.crudier.resources.person.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +14,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import api.littlesekii.crudier.exception.InvalidRequestParamException;
 import api.littlesekii.crudier.resources.person.controller.dto.PersonRequestDTO;
 import api.littlesekii.crudier.resources.person.controller.dto.PersonResponseDTO;
 import api.littlesekii.crudier.resources.person.model.Person;
 import api.littlesekii.crudier.resources.person.service.PersonService;
+import api.littlesekii.crudier.util.Utils;
 
 @RestController
 @RequestMapping("/person")
@@ -79,7 +83,11 @@ public class PersonController {
 			data.getRegister()
 		);
 			
-		return ResponseEntity.ok().body(res);
+		//get the created entity URI location
+		URI uri = Utils.getCreatedEntityURILocation(data.getId());
+		
+		return ResponseEntity.created(uri).body(res);
+
 	}
 	
 	@PutMapping
