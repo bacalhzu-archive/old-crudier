@@ -50,6 +50,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+		    <groupId>io.github.littlesekii</groupId>
+		    <artifactId>aritana</artifactId>
+		    <version>1.0.1</version>
+		</dependency>
+				
+	
 	</dependencies>
 
 	<build>

@@ -1,14 +1,12 @@
-{
-	"properties": [
-  		{
-    		"name": "api.name",
-    		"type": "java.lang.String",
-    		"description": "The name of API"
- 		},
-  		{
-    		"name": "api.version",
-    		"type": "java.lang.String",
-    		"description": "The version of API"
-  		}
-	]
-}
+{"properties": [
+  {
+    "name": "api.name",
+    "type": "java.lang.String",
+    "description": "The name of API"
+  },
+  {
+    "name": "api.version",
+    "type": "java.lang.String",
+    "description": "The version of API"
+  }
+]}

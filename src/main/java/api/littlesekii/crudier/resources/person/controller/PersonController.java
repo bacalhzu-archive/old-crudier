@@ -20,6 +20,7 @@ import api.littlesekii.crudier.resources.person.controller.dto.PersonResponseDTO
 import api.littlesekii.crudier.resources.person.model.Person;
 import api.littlesekii.crudier.resources.person.service.PersonService;
 import api.littlesekii.crudier.util.Utils;
+import io.github.littlesekii.aritana.util.Validation;
 
 @RestController
 @RequestMapping("/person")
@@ -63,7 +64,7 @@ public class PersonController {
 	@PostMapping
 	public ResponseEntity<PersonResponseDTO> insert(@RequestBody PersonRequestDTO req) {
 		
-		if (Utils.notValid(req.name()) || Utils.notValid(req.register()))
+		if (Validation.notValid(req.name()) || Validation.notValid(req.register()))
 			throw new InvalidRequestParamException("Please check informed parameters and try again.");
 		
 		PersonResponseDTO res = null;		
@@ -91,7 +92,7 @@ public class PersonController {
 	@PutMapping("/{id}")
 	public ResponseEntity<PersonResponseDTO> update(@PathVariable Long id, @RequestBody PersonRequestDTO req) {
 		
-		if (Utils.notValid(req.name()) || Utils.notValid(req.register()))
+		if (Validation.notValid(req.name()) || Validation.notValid(req.register()))
 			throw new InvalidRequestParamException("Please check informed parameters and try again.");
 		
 		PersonResponseDTO res = null;

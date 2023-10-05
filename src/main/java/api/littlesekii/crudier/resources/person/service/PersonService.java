@@ -31,7 +31,7 @@ public class PersonService {
 	}
 	
 	public Person insert(Person person) {
-		
+				
 		Person existingData = repository.findByRegister(person.getRegister());
 		
 		if (existingData != null)

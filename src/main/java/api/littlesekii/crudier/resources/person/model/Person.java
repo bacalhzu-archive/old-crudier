@@ -2,6 +2,8 @@ package api.littlesekii.crudier.resources.person.model;
 
 import java.io.Serializable;
 
+import api.littlesekii.crudier.exception.InvalidDataException;
+import io.github.littlesekii.aritana.util.Validation;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,14 +34,14 @@ public class Person implements Serializable {
 	
 	public Person(String name, String register) {
 		this.id = null;
-		this.name = name;
-		this.register = register;
+		setName(name);
+		setRegister(register);
 	}
 	
 	public Person(Long id, String name, String register) {
 		this.id = id;
-		this.name = name;
-		this.register = register;
+		setName(name);
+		setRegister(register);
 	}
 
 	public Long getId() {
@@ -63,6 +65,10 @@ public class Person implements Serializable {
 	}
 
 	public void setRegister(String register) {
+		
+		if (!Validation.validCPF(register)) 
+			throw new InvalidDataException("Invalid value to register field. CPF is not valid.");
+		
 		this.register = register;
 	}
 	
